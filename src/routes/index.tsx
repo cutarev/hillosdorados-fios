@@ -1,39 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import heroThread from "../assets/hero-thread.jpg";
-import product01 from "../assets/product-01.jpg";
-import product02 from "../assets/product-02.jpg";
-import product03 from "../assets/product-03.jpg";
+import { PRODUCTS, WHATSAPP_NUMBER, EMAIL } from "../data/products";
 
-// Placeholders de contato — substitua pelos dados reais da empresa
-const WHATSAPP_NUMBER = "5511999999999";
-const EMAIL = "contato@hillosdorados.com.br";
-
-const PRODUCTS = [
-  {
-    index: "01",
-    name: "Fio 50mm",
-    tube: "Tubete vermelho",
-    spec: "Nylon termodegradável • branco",
-    image: product01,
-    alt: "Cone de fio de nylon branco 50mm em tubete vermelho",
-  },
-  {
-    index: "02",
-    name: "Fio 30mm",
-    tube: "Tubete roxo",
-    spec: "Nylon termodegradável • branco",
-    image: product02,
-    alt: "Cone de fio de nylon branco 30mm em tubete roxo",
-  },
-  {
-    index: "03",
-    name: "Fio 50mm Preto",
-    tube: "Tubete vermelho",
-    spec: "Nylon termodegradável • preto",
-    image: product03,
-    alt: "Cone de fio de nylon preto 50mm em tubete vermelho",
-  },
-];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -42,7 +10,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Fios de nylon termodegradáveis para malharias. Três bitolas em cone, vendidos por quilo. Cotação direta por WhatsApp ou e-mail.",
+          "Fios de nylon termodegradáveis para malharias. Bitolas 30mm e 50mm em cone, vendidos por quilo. Cotação direta por WhatsApp ou e-mail.",
       },
       {
         property: "og:title",
@@ -51,7 +19,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Fios de nylon termodegradáveis para malharias. Três bitolas em cone, vendidos por quilo. Cotação direta por WhatsApp ou e-mail.",
+          "Fios de nylon termodegradáveis para malharias. Bitolas 30mm e 50mm em cone, vendidos por quilo. Cotação direta por WhatsApp ou e-mail.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -70,9 +38,9 @@ function Index() {
             HILLOSDORADOS
           </div>
           <div className="hidden md:flex gap-10 text-[11px] uppercase tracking-[0.2em] font-semibold">
-            <a href="#produtos" className="hover:text-gold-primary transition-colors">
+            <Link to="/produtos" className="hover:text-gold-primary transition-colors">
               Produtos
-            </a>
+            </Link>
             <a href="#especificacoes" className="hover:text-gold-primary transition-colors">
               Especificações
             </a>
@@ -94,16 +62,16 @@ function Index() {
               Fio de nylon termodegradável, em cone, vendido por quilo.
             </h1>
             <p className="text-base text-paper-white/70 max-w-md leading-relaxed mb-10">
-              Três bitolas disponíveis para malharias. Fornecimento direto,
-              repasse por quilo, cotação por WhatsApp ou e-mail.
+              Fornecimento para malharias. Repasse por quilo, cotação direta
+              por WhatsApp ou e-mail.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a
-                href="#produtos"
+              <Link
+                to="/produtos"
                 className="bg-gold-primary text-industrial-black px-8 py-4 uppercase text-[11px] tracking-[0.2em] font-bold hover:brightness-110 transition"
               >
                 Ver os fios
-              </a>
+              </Link>
               <a
                 href="#contato"
                 className="border border-paper-white/30 px-8 py-4 uppercase text-[11px] tracking-[0.2em] font-bold hover:border-gold-primary hover:text-gold-primary transition"
@@ -129,9 +97,12 @@ function Index() {
         <div className="max-w-7xl mx-auto px-8">
           <div className="mb-14 border-b border-industrial-black/10 pb-6 flex items-end justify-between flex-wrap gap-4">
             <h2 className="font-display text-3xl">Linha de produtos</h2>
-            <p className="text-xs uppercase tracking-[0.2em] text-industrial-black/50">
-              3 fios • venda por quilo
-            </p>
+            <Link
+              to="/produtos"
+              className="text-xs uppercase tracking-[0.2em] text-industrial-black/50 hover:text-gold-primary transition-colors"
+            >
+              Ver todos os produtos →
+            </Link>
           </div>
 
           <div className="grid md:grid-cols-3 gap-10">
@@ -174,12 +145,13 @@ function Index() {
                   <p className="text-xs uppercase tracking-[0.15em] text-industrial-black/50 mb-6">
                     {p.spec}
                   </p>
-                  <a
-                    href="#contato"
+                  <Link
+                    to="/produtos"
+                    hash={p.slug}
                     className="inline-block w-full text-center bg-industrial-black text-paper-white py-3 text-[11px] uppercase tracking-[0.2em] font-bold group-hover:bg-gold-primary group-hover:text-industrial-black transition"
                   >
-                    Solicitar cotação
-                  </a>
+                    Detalhes do produto
+                  </Link>
                 </div>
               </article>
             ))}
@@ -198,9 +170,8 @@ function Index() {
               Aplicação exclusiva em malharia
             </h2>
             <p className="text-paper-white/70 leading-relaxed">
-              Os fios da Hillosdorados são fios de nylon termodegradáveis
-              destinados exclusivamente a malharias. São fornecidos em cone e
-              comercializados por quilo.
+              Fios de nylon termodegradáveis destinados exclusivamente a
+              malharias. Fornecidos em cone e comercializados por quilo.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-px bg-white/10 border border-white/10">
