@@ -8,23 +8,50 @@ import product03 from "../assets/product-03.jpg";
 const WHATSAPP_NUMBER = "5511999999999";
 const EMAIL = "contato@hillosdorados.com.br";
 
+const PRODUCTS = [
+  {
+    index: "01",
+    name: "Fio 50mm",
+    tube: "Tubete vermelho",
+    spec: "Nylon termodegradável • branco",
+    image: product01,
+    alt: "Cone de fio de nylon branco 50mm em tubete vermelho",
+  },
+  {
+    index: "02",
+    name: "Fio 30mm",
+    tube: "Tubete roxo",
+    spec: "Nylon termodegradável • branco",
+    image: product02,
+    alt: "Cone de fio de nylon branco 30mm em tubete roxo",
+  },
+  {
+    index: "03",
+    name: "Fio 50mm Preto",
+    tube: "Tubete vermelho",
+    spec: "Nylon termodegradável • preto",
+    image: product03,
+    alt: "Cone de fio de nylon preto 50mm em tubete vermelho",
+  },
+];
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Hillosdorados | Fios de Nylon Termodegradáveis" },
+      { title: "Hillosdorados | Fios de Nylon Termodegradáveis para Malharia" },
       {
         name: "description",
         content:
-          "Fios de nylon termodegradáveis Hillosdorados. Três linhas de fibras para indústria têxtil consciente. Solicite cotação por WhatsApp ou e-mail.",
+          "Fios de nylon termodegradáveis para malharias. Três bitolas em cone, vendidos por quilo. Cotação direta por WhatsApp ou e-mail.",
       },
       {
         property: "og:title",
-        content: "Hillosdorados | Fios de Nylon Termodegradáveis",
+        content: "Hillosdorados | Fios de Nylon Termodegradáveis para Malharia",
       },
       {
         property: "og:description",
         content:
-          "Fios de nylon termodegradáveis Hillosdorados. Três linhas de fibras para indústria têxtil consciente. Solicite cotação por WhatsApp ou e-mail.",
+          "Fios de nylon termodegradáveis para malharias. Três bitolas em cone, vendidos por quilo. Cotação direta por WhatsApp ou e-mail.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -35,251 +62,200 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-paper-white text-industrial-black font-sans selection:bg-gold-primary/30">
+    <div className="min-h-screen bg-paper-white text-industrial-black font-sans">
       {/* Navigation */}
-      <nav className="flex justify-between items-center px-8 py-6 border-b border-industrial-black/5">
-        <div className="font-display text-2xl font-bold tracking-widest text-gold-primary italic">
-          HILLOSDORADOS
-        </div>
-        <div className="hidden md:flex gap-8 text-xs uppercase tracking-widest font-semibold">
-          <a
-            href="#produtos"
-            className="hover:text-gold-primary transition-colors"
-          >
-            Produtos
-          </a>
-          <a
-            href="#sustentabilidade"
-            className="hover:text-gold-primary transition-colors"
-          >
-            Tecnologia
-          </a>
-          <a
-            href="#contato"
-            className="hover:text-gold-primary transition-colors text-gold-primary"
-          >
-            Solicitar Catálogo
-          </a>
+      <nav className="sticky top-0 z-50 bg-industrial-black text-paper-white">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-8 h-16">
+          <div className="font-display text-lg font-bold tracking-[0.35em]">
+            HILLOSDORADOS
+          </div>
+          <div className="hidden md:flex gap-10 text-[11px] uppercase tracking-[0.2em] font-semibold">
+            <a href="#produtos" className="hover:text-gold-primary transition-colors">
+              Produtos
+            </a>
+            <a href="#especificacoes" className="hover:text-gold-primary transition-colors">
+              Especificações
+            </a>
+            <a href="#contato" className="hover:text-gold-primary transition-colors">
+              Contato
+            </a>
+          </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <header className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-8 pt-20 pb-32 grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <span className="inline-block px-3 py-1 bg-gold-primary/10 text-gold-primary text-[10px] font-bold tracking-[0.2em] uppercase mb-6">
-              Inovação Têxtil Brasileira
+      {/* Hero */}
+      <header className="bg-industrial-black text-paper-white">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2">
+          <div className="px-8 py-24 flex flex-col justify-center">
+            <span className="text-gold-primary text-[11px] font-bold tracking-[0.25em] uppercase mb-6">
+              Fios de nylon para malharia
             </span>
-            <h1 className="font-display text-5xl md:text-7xl leading-[1.1] mb-8">
-              A Excelência em <span className="text-gold-primary">Fios</span>{" "}
-              Termodegradáveis
+            <h1 className="font-display text-4xl md:text-6xl leading-[1.05] mb-8">
+              Fio de nylon termodegradável, em cone, vendido por quilo.
             </h1>
-            <p className="text-lg text-industrial-black/70 max-w-md leading-relaxed mb-10">
-              Fundindo a durabilidade do nylon com o compromisso ambiental. A
-              Hillosdorados fornece a base para a indústria têxtil consciente.
+            <p className="text-base text-paper-white/70 max-w-md leading-relaxed mb-10">
+              Três bitolas disponíveis para malharias. Fornecimento direto,
+              repasse por quilo, cotação por WhatsApp ou e-mail.
             </p>
             <div className="flex flex-wrap gap-4">
               <a
-                href="#contato"
-                className="bg-industrial-black text-white px-8 py-4 hover:bg-gold-primary transition-all duration-300 uppercase text-xs tracking-widest font-bold"
+                href="#produtos"
+                className="bg-gold-primary text-industrial-black px-8 py-4 uppercase text-[11px] tracking-[0.2em] font-bold hover:brightness-110 transition"
               >
-                Falar com Especialista
+                Ver os fios
+              </a>
+              <a
+                href="#contato"
+                className="border border-paper-white/30 px-8 py-4 uppercase text-[11px] tracking-[0.2em] font-bold hover:border-gold-primary hover:text-gold-primary transition"
+              >
+                Solicitar cotação
               </a>
             </div>
           </div>
-          <div className="relative">
+          <div className="relative min-h-[420px]">
             <img
               src={heroThread}
-              alt="Carretel premium de fio de nylon dourado da Hillosdorados"
-              width={800}
-              height={1008}
-              className="w-full aspect-[4/5] object-cover shadow-2xl shadow-gold-primary/10"
+              alt="Cones de fio de nylon em tubetes vermelhos e roxos em prateleira de malharia"
+              width={1280}
+              height={1600}
+              className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute -bottom-6 -left-6 bg-gold-primary p-8 hidden lg:block">
-              <p className="text-white font-display text-2xl">100%</p>
-              <p className="text-white/80 text-[10px] uppercase tracking-tighter">
-                Termodegradável
-              </p>
-            </div>
           </div>
         </div>
       </header>
 
-      {/* Products Section */}
-      <section id="produtos" className="bg-industrial-black py-32 text-paper-white">
+      {/* Products */}
+      <section id="produtos" className="py-24 bg-paper-white">
         <div className="max-w-7xl mx-auto px-8">
-          <div className="mb-20 text-center">
-            <h2 className="font-display text-4xl mb-4">Nossa Coleção de Fibras</h2>
-            <div className="w-24 h-px bg-gold-primary mx-auto"></div>
+          <div className="mb-14 border-b border-industrial-black/10 pb-6 flex items-end justify-between flex-wrap gap-4">
+            <h2 className="font-display text-3xl">Linha de produtos</h2>
+            <p className="text-xs uppercase tracking-[0.2em] text-industrial-black/50">
+              3 fios • venda por quilo
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-px bg-white/10 border border-white/10">
-            {/* Product 1 */}
-            <div className="bg-industrial-black p-12 hover:bg-white/5 transition-colors group">
-              <span className="text-gold-primary font-display text-lg mb-6 block">
-                01. Fio 50mm
-              </span>
-              <h3 className="text-2xl mb-4">Versatilidade Industrial</h3>
-              <p className="text-sm text-paper-white/60 leading-relaxed mb-8">
-                Fio padrão de 50mm, ideal para costuras de alta resistência e
-                aplicações industriais gerais. Termodegradável e consistente.
-              </p>
-              <img
-                src={product01}
-                alt="Close técnico da textura do fio de nylon 50mm branco"
-                width={816}
-                height={816}
-                loading="lazy"
-                className="w-full aspect-square object-cover mb-8"
-              />
-              <a
-                href="#contato"
-                className="inline-flex items-center text-xs tracking-widest uppercase font-bold group-hover:text-gold-primary"
+          <div className="grid md:grid-cols-3 gap-10">
+            {PRODUCTS.map((p) => (
+              <article
+                key={p.index}
+                className="border border-industrial-black/10 bg-paper-white group"
               >
-                Solicitar Orçamento →
-              </a>
-            </div>
-
-            {/* Product 2 */}
-            <div className="bg-industrial-black p-12 hover:bg-white/5 transition-colors group border-x border-white/10">
-              <span className="text-gold-primary font-display text-lg mb-6 block">
-                02. Fio 30mm
-              </span>
-              <h3 className="text-2xl mb-4">Precisão Delicada</h3>
-              <p className="text-sm text-paper-white/60 leading-relaxed mb-8">
-                Fio fino de 30mm, perfeito para trabalhos delicados,
-                acabamentos de precisão e aplicações que exigem leveza.
-              </p>
-              <img
-                src={product02}
-                alt="Textura suave do fio de nylon 30mm em tons dourados"
-                width={816}
-                height={816}
-                loading="lazy"
-                className="w-full aspect-square object-cover mb-8"
-              />
-              <a
-                href="#contato"
-                className="inline-flex items-center text-xs tracking-widest uppercase font-bold group-hover:text-gold-primary"
-              >
-                Solicitar Orçamento →
-              </a>
-            </div>
-
-            {/* Product 3 */}
-            <div className="bg-industrial-black p-12 hover:bg-white/5 transition-colors group">
-              <span className="text-gold-primary font-display text-lg mb-6 block">
-                03. Fio 50mm Preto
-              </span>
-              <h3 className="text-2xl mb-4">Performance Técnica</h3>
-              <p className="text-sm text-paper-white/60 leading-relaxed mb-8">
-                Fio de 50mm na cor preta, desenvolvido para aplicações técnicas,
-                estéticas escuras e acabamentos que exigem discrição.
-              </p>
-              <img
-                src={product03}
-                alt="Fio de nylon 50mm preto trançado com detalhes dourados"
-                width={816}
-                height={816}
-                loading="lazy"
-                className="w-full aspect-square object-cover mb-8"
-              />
-              <a
-                href="#contato"
-                className="inline-flex items-center text-xs tracking-widest uppercase font-bold group-hover:text-gold-primary"
-              >
-                Solicitar Orçamento →
-              </a>
-            </div>
+                <img
+                  src={p.image}
+                  alt={p.alt}
+                  width={1024}
+                  height={1024}
+                  loading="lazy"
+                  className="w-full aspect-square object-cover bg-industrial-black"
+                />
+                <div className="p-8">
+                  <span className="text-gold-primary text-[11px] font-bold tracking-[0.25em]">
+                    {p.index}
+                  </span>
+                  <h3 className="font-display text-2xl mt-2 mb-4">{p.name}</h3>
+                  <dl className="text-sm text-industrial-black/70 space-y-2 mb-8">
+                    <div className="flex justify-between border-b border-industrial-black/10 pb-2">
+                      <dt>Composição</dt>
+                      <dd className="font-medium text-industrial-black">Nylon</dd>
+                    </div>
+                    <div className="flex justify-between border-b border-industrial-black/10 pb-2">
+                      <dt>Tubete</dt>
+                      <dd className="font-medium text-industrial-black">{p.tube}</dd>
+                    </div>
+                    <div className="flex justify-between border-b border-industrial-black/10 pb-2">
+                      <dt>Apresentação</dt>
+                      <dd className="font-medium text-industrial-black">Cone</dd>
+                    </div>
+                    <div className="flex justify-between">
+                      <dt>Venda</dt>
+                      <dd className="font-medium text-industrial-black">Por quilo</dd>
+                    </div>
+                  </dl>
+                  <p className="text-xs uppercase tracking-[0.15em] text-industrial-black/50 mb-6">
+                    {p.spec}
+                  </p>
+                  <a
+                    href="#contato"
+                    className="inline-block w-full text-center bg-industrial-black text-paper-white py-3 text-[11px] uppercase tracking-[0.2em] font-bold group-hover:bg-gold-primary group-hover:text-industrial-black transition"
+                  >
+                    Solicitar cotação
+                  </a>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Technology / Trust Section */}
-      <section id="sustentabilidade" className="py-32 bg-paper-white">
-        <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
+      {/* Specs */}
+      <section id="especificacoes" className="py-24 bg-industrial-black text-paper-white">
+        <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16">
           <div>
-            <span className="text-gold-primary text-xs font-bold tracking-[0.2em] uppercase mb-4 block">
-              Tecnologia
+            <span className="text-gold-primary text-[11px] font-bold tracking-[0.25em] uppercase">
+              Especificações
             </span>
-            <h2 className="font-display text-4xl mb-6">
-              Fios que Suportam o Futuro
+            <h2 className="font-display text-3xl mt-4 mb-6">
+              Aplicação exclusiva em malharia
             </h2>
-            <p className="text-lg text-industrial-black/70 leading-relaxed mb-8">
-              Nossos fios de nylon termodegradável combinam resistência mecânica
-              com degradação controlada. Eles mantêm a performance esperada
-              durante o uso e, ao final do ciclo, se desintegram de forma mais
-              consciente — reduzindo o impacto ambiental da cadeia têxtil.
+            <p className="text-paper-white/70 leading-relaxed">
+              Os fios da Hillosdorados são fios de nylon termodegradáveis
+              destinados exclusivamente a malharias. São fornecidos em cone e
+              comercializados por quilo.
             </p>
-            <div className="grid grid-cols-3 gap-8">
-              <div>
-                <p className="font-display text-3xl text-gold-primary">3</p>
-                <p className="text-[10px] uppercase tracking-widest text-industrial-black/50 mt-1">
-                  Linhas de fio
-                </p>
-              </div>
-              <div>
-                <p className="font-display text-3xl text-gold-primary">100%</p>
-                <p className="text-[10px] uppercase tracking-widest text-industrial-black/50 mt-1">
-                  Termodegradável
-                </p>
-              </div>
-              <div>
-                <p className="font-display text-3xl text-gold-primary">B2B</p>
-                <p className="text-[10px] uppercase tracking-widest text-industrial-black/50 mt-1">
-                  Atendimento
-                </p>
-              </div>
-            </div>
           </div>
-          <div className="bg-gold-light/30 p-12 border border-industrial-black/5">
-            <blockquote className="font-display text-2xl leading-relaxed text-industrial-black">
-              "A durabilidade no uso e a responsabilidade no descarte podem
-              caminhar juntas."
-            </blockquote>
-            <p className="mt-6 text-sm text-industrial-black/60">
-              — Hillosdorados
-            </p>
+          <div className="grid grid-cols-2 gap-px bg-white/10 border border-white/10">
+            {[
+              ["Material", "Nylon"],
+              ["Tipo", "Termodegradável"],
+              ["Bitolas", "30mm e 50mm"],
+              ["Cores", "Branco e preto"],
+              ["Embalagem", "Cone"],
+              ["Unidade de venda", "Quilo"],
+            ].map(([label, value]) => (
+              <div key={label} className="bg-industrial-black p-6">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-paper-white/40">
+                  {label}
+                </p>
+                <p className="font-display text-xl mt-2 text-gold-primary">{value}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contato" className="py-32 bg-paper-white border-t border-industrial-black/5">
-        <div className="max-w-4xl mx-auto px-8 text-center">
-          <h2 className="font-display text-4xl mb-6">Inicie seu Projeto</h2>
-          <p className="text-industrial-black/60 mb-12 max-w-md mx-auto">
-            Estamos prontos para atender sua demanda industrial ou de pequena
-            escala. Entre em contato para catálogos, amostras e cotações.
+      {/* Contact */}
+      <section id="contato" className="py-24 bg-paper-white">
+        <div className="max-w-3xl mx-auto px-8 text-center">
+          <h2 className="font-display text-3xl mb-4">Cotação e pedidos</h2>
+          <p className="text-industrial-black/60 mb-10">
+            Informe a bitola, a cor e a quantidade em quilos. Respondemos por
+            WhatsApp ou e-mail.
           </p>
 
-          <div className="flex flex-col md:flex-row gap-6 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href={`https://wa.me/${WHATSAPP_NUMBER}`}
-              className="flex items-center justify-center gap-3 bg-[#25D366] text-white px-10 py-5 font-bold uppercase text-xs tracking-widest hover:brightness-110 transition-all shadow-xl shadow-green-500/20"
+              className="bg-industrial-black text-paper-white px-10 py-4 font-bold uppercase text-[11px] tracking-[0.2em] hover:bg-gold-primary hover:text-industrial-black transition"
             >
-              WhatsApp Direto
+              WhatsApp
             </a>
             <a
               href={`mailto:${EMAIL}`}
-              className="flex items-center justify-center gap-3 border-2 border-industrial-black text-industrial-black px-10 py-5 font-bold uppercase text-xs tracking-widest hover:bg-industrial-black hover:text-white transition-all"
+              className="border border-industrial-black px-10 py-4 font-bold uppercase text-[11px] tracking-[0.2em] hover:bg-industrial-black hover:text-paper-white transition"
             >
-              Enviar E-mail
+              E-mail
             </a>
-          </div>
-
-          <p className="mt-8 text-xs text-industrial-black/40">
-            *Substitua os placeholders de WhatsApp e e-mail no topo do arquivo{" "}
-            <code className="text-gold-primary">src/routes/index.tsx</code>.
-          </p>
-
-          <div className="mt-20 pt-10 border-t border-industrial-black/5">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-industrial-black/40">
-              Hillosdorados • Brasil • 2026
-            </p>
           </div>
         </div>
       </section>
+
+      <footer className="bg-industrial-black text-paper-white/50 py-10">
+        <div className="max-w-7xl mx-auto px-8 flex flex-wrap justify-between gap-4 text-[10px] uppercase tracking-[0.25em]">
+          <span className="text-gold-primary">Hillosdorados</span>
+          <span>Fios de nylon termodegradáveis para malharia</span>
+          <span>Brasil • 2026</span>
+        </div>
+      </footer>
     </div>
   );
 }
