@@ -104,11 +104,11 @@ a variável antes do build.
       Se a interface não oferecer a troca, faça por SSH:
 
       ```sh
-                                  cd /home2/joaol109/repositories/hillosdorados-fios
-                                  git fetch origin
-                                  git checkout -B stable-website origin/stable-website
-                                  git status          # precisa dizer "nothing to commit, working tree clean"
-                                  ```
+                                      cd /home2/joaol109/repositories/hillosdorados-fios
+                                      git fetch origin
+                                      git checkout -B stable-website origin/stable-website
+                                      git status          # precisa dizer "nothing to commit, working tree clean"
+                                      ```
 
 - [ ] **4.** Aba **Pull or Deploy** → **Update from Remote** (puxa o que o Actions
       publicou)

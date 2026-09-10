@@ -99,9 +99,17 @@ deployment:
   tasks:
     - export DEPLOYPATH=${CPANEL_DEPLOY_PATH}
     - /bin/mkdir -p "$DEPLOYPATH"
-    # Sem --delete: arquivos que ja existiam na pasta publica sao preservados.
-    # Os assets tem hash no nome, entao versoes antigas apenas acumulam.
-    - /usr/bin/rsync -a --exclude '.git' --exclude '.cpanel.yml' ./ "$DEPLOYPATH/"
+    # -rltD em vez de -a: -a inclui -p -o -g, que copiariam permissao, dono e
+    # grupo da pasta do repositorio (0700, grupo do usuario) para a public_html.
+    # O Apache precisa que ela seja 0750 com grupo nobody; com 0700 ele perde
+    # acesso e o site inteiro passa a responder 403.
+    # --chmod fixa permissao previsivel em tudo que e copiado.
+    # Sem --delete: o que ja existia na pasta publica e preservado; os assets
+    # tem hash no nome, entao versoes antigas apenas acumulam.
+    - /usr/bin/rsync -rltD --chmod=D755,F644 --exclude '.git' --exclude '.cpanel.yml' ./ "$DEPLOYPATH/"
+    # Rede de seguranca: devolve a public_html a permissao que o Apache espera,
+    # mesmo que algo antes tenha mexido nela.
+    - /bin/chmod 750 "$DEPLOYPATH"
 `,
 );
 
