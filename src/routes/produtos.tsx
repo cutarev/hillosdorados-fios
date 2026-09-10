@@ -1,5 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PRODUCTS, WHATSAPP_NUMBER, EMAIL } from "../data/products";
+import { PRODUCTS } from "../data/products";
+import { EMAIL, WHATSAPP_NUMBER } from "../data/site";
+import { BrandMark } from "../components/brand-mark";
+import { SiteFooter } from "../components/site-footer";
 
 export const Route = createFileRoute("/produtos")({
   head: () => ({
@@ -31,9 +34,7 @@ function Produtos() {
     <div className="min-h-screen bg-paper-white text-industrial-black font-sans">
       <nav className="sticky top-0 z-50 bg-industrial-black text-paper-white">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-8 h-16">
-          <Link to="/" className="font-display text-lg font-bold tracking-[0.35em]">
-            HILLOSDORADOS
-          </Link>
+          <BrandMark />
           <div className="hidden md:flex gap-10 text-[11px] uppercase tracking-[0.2em] font-semibold">
             <Link to="/" className="hover:text-gold-primary transition-colors">
               Início
@@ -53,7 +54,7 @@ function Produtos() {
           <span className="text-gold-primary text-[11px] font-bold tracking-[0.25em] uppercase">
             Linha de produtos
           </span>
-          <h1 className="font-display text-4xl md:text-5xl mt-5 max-w-3xl leading-[1.1]">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl mt-5 max-w-3xl leading-[1.1] break-words">
             Fios de nylon termodegradáveis em cone
           </h1>
           <p className="text-paper-white/70 mt-6 max-w-xl leading-relaxed">
@@ -125,13 +126,7 @@ function Produtos() {
         ))}
       </main>
 
-      <footer className="bg-industrial-black text-paper-white/50 py-10">
-        <div className="max-w-7xl mx-auto px-8 flex flex-wrap justify-between gap-4 text-[10px] uppercase tracking-[0.25em]">
-          <span className="text-gold-primary">Hillosdorados</span>
-          <span>Fios de nylon termodegradáveis para malharia</span>
-          <span>Brasil • 2026</span>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

@@ -2,9 +2,6 @@ import product01 from "../assets/product-01.jpg";
 import product02 from "../assets/product-02.jpg";
 import product03 from "../assets/product-03.jpg";
 
-export const WHATSAPP_NUMBER = "5511999999999";
-export const EMAIL = "contato@hillosdorados.com.br";
-
 export type Product = {
   index: string;
   slug: string;

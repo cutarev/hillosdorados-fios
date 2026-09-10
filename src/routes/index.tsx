@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import heroThread from "../assets/hero-thread.jpg";
-import { PRODUCTS, WHATSAPP_NUMBER, EMAIL } from "../data/products";
+import { PRODUCTS } from "../data/products";
+import { EMAIL, EMAIL_LINK, WHATSAPP_LINK, formatWhatsApp } from "../data/site";
+import { BrandMark } from "../components/brand-mark";
+import { SiteFooter } from "../components/site-footer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -33,7 +36,7 @@ function Index() {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-industrial-black text-paper-white">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-8 h-16">
-          <div className="font-display text-lg font-bold tracking-[0.35em]">HILLOSDORADOS</div>
+          <BrandMark />
           <div className="hidden md:flex gap-10 text-[11px] uppercase tracking-[0.2em] font-semibold">
             <Link to="/produtos" className="hover:text-gold-primary transition-colors">
               Produtos
@@ -51,11 +54,13 @@ function Index() {
       {/* Hero */}
       <header className="bg-industrial-black text-paper-white">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2">
-          <div className="px-8 py-24 flex flex-col justify-center">
+          <div className="min-w-0 px-8 py-24 flex flex-col justify-center">
             <span className="text-gold-primary text-[11px] font-bold tracking-[0.25em] uppercase mb-6">
               Fios de nylon para malharia
             </span>
-            <h1 className="font-display text-4xl md:text-6xl leading-[1.05] mb-8">
+            {/* text-3xl no celular: "termodegradável" e larga demais para 390px
+                em text-4xl e empurrava a pagina para o lado. */}
+            <h1 className="font-display text-3xl sm:text-4xl md:text-6xl leading-[1.05] mb-8 break-words">
               Fio de nylon termodegradável, em cone, vendido por quilo.
             </h1>
             <p className="text-base text-paper-white/70 max-w-md leading-relaxed mb-10">
@@ -76,7 +81,7 @@ function Index() {
               </a>
             </div>
           </div>
-          <div className="relative min-h-[420px]">
+          <div className="relative min-w-0 min-h-[420px]">
             <img
               src={heroThread}
               alt="Cones de fio de nylon em tubetes vermelhos e roxos em prateleira de malharia"
@@ -168,7 +173,9 @@ function Index() {
               cone e comercializados por quilo.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-px bg-white/10 border border-white/10">
+          {/* Uma coluna no celular: em duas, cada celula fica com ~162px e
+              "Termodegradavel" nao cabe, empurrando a pagina para o lado. */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/10 border border-white/10">
             {[
               ["Material", "Nylon"],
               ["Tipo", "Termodegradável"],
@@ -181,7 +188,7 @@ function Index() {
                 <p className="text-[10px] uppercase tracking-[0.2em] text-paper-white/40">
                   {label}
                 </p>
-                <p className="font-display text-xl mt-2 text-gold-primary">{value}</p>
+                <p className="font-display text-xl mt-2 text-gold-primary break-words">{value}</p>
               </div>
             ))}
           </div>
@@ -198,28 +205,53 @@ function Index() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}`}
+              href={WHATSAPP_LINK}
               className="bg-industrial-black text-paper-white px-10 py-4 font-bold uppercase text-[11px] tracking-[0.2em] hover:bg-gold-primary hover:text-industrial-black transition"
             >
               WhatsApp
             </a>
             <a
-              href={`mailto:${EMAIL}`}
+              href={EMAIL_LINK}
               className="border border-industrial-black px-10 py-4 font-bold uppercase text-[11px] tracking-[0.2em] hover:bg-industrial-black hover:text-paper-white transition"
             >
               E-mail
             </a>
           </div>
+
+          {/* Os canais tambem escritos: comprador industrial costuma querer
+              salvar o numero na agenda em vez de so clicar no botao. */}
+          <dl className="mt-12 grid gap-6 sm:grid-cols-2 text-left border-t border-industrial-black/10 pt-8">
+            <div>
+              <dt className="text-[10px] uppercase tracking-[0.25em] text-industrial-black/40">
+                WhatsApp
+              </dt>
+              <dd className="mt-2">
+                <a
+                  href={WHATSAPP_LINK}
+                  className="font-display text-xl hover:text-gold-primary transition-colors"
+                >
+                  {formatWhatsApp()}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt className="text-[10px] uppercase tracking-[0.25em] text-industrial-black/40">
+                E-mail
+              </dt>
+              <dd className="mt-2">
+                <a
+                  href={EMAIL_LINK}
+                  className="text-lg font-medium hover:text-gold-primary transition-colors break-words"
+                >
+                  {EMAIL}
+                </a>
+              </dd>
+            </div>
+          </dl>
         </div>
       </section>
 
-      <footer className="bg-industrial-black text-paper-white/50 py-10">
-        <div className="max-w-7xl mx-auto px-8 flex flex-wrap justify-between gap-4 text-[10px] uppercase tracking-[0.25em]">
-          <span className="text-gold-primary">Hillosdorados</span>
-          <span>Fios de nylon termodegradáveis para malharia</span>
-          <span>Brasil • 2026</span>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

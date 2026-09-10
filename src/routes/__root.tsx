@@ -10,6 +10,7 @@ import {
 import type { ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { BRAND_NAME, SITE_DESCRIPTION, SITE_URL, TAGLINE } from "../data/site";
 
 function NotFoundComponent() {
   return (
@@ -73,20 +74,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Hillosdorados" },
-      {
-        name: "description",
-        content: "Fios de nylon termodegradáveis para indústria têxtil consciente.",
-      },
-      { name: "author", content: "Hillosdorados" },
-      { property: "og:title", content: "Hillosdorados" },
-      {
-        property: "og:description",
-        content: "Fios de nylon termodegradáveis para indústria têxtil consciente.",
-      },
+      { title: `${BRAND_NAME} | ${TAGLINE}` },
+      { name: "description", content: SITE_DESCRIPTION },
+      { name: "author", content: BRAND_NAME },
+      { property: "og:site_name", content: BRAND_NAME },
+      { property: "og:locale", content: "pt_BR" },
+      { property: "og:title", content: `${BRAND_NAME} | ${TAGLINE}` },
+      { property: "og:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: `${SITE_URL}/og.jpg` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      {
+        property: "og:image:alt",
+        content: `${BRAND_NAME} — cone de fio de nylon termodegradável`,
+      },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Hillosdorados" },
+      { name: "twitter:image", content: `${SITE_URL}/og.jpg` },
     ],
     links: [
       {
@@ -106,7 +111,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      // SVG e o formato que os navegadores modernos preferem; o .ico fica de
+      // reserva para os antigos e para o atalho na area de trabalho.
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      { rel: "canonical", href: `${SITE_URL}/` },
     ],
   }),
   shellComponent: RootShell,

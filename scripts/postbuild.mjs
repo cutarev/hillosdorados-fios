@@ -13,6 +13,10 @@ import path from "node:path";
 const CANDIDATES = ["dist/client", "dist"];
 const SHELL = "_shell.html";
 
+// Pasta publica da hospedagem cPanel. Trocar aqui (ou exportar CPANEL_DEPLOY_PATH
+// antes do build) se o site passar a morar em outro dominio/subdominio.
+const CPANEL_DEPLOY_PATH = process.env.CPANEL_DEPLOY_PATH ?? "/home2/joaol109/public_html";
+
 const outDir = CANDIDATES.find((dir) => existsSync(path.join(dir, SHELL)));
 
 if (!outDir) {
@@ -61,6 +65,25 @@ RewriteRule ^ index.html [L]
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
 </IfModule>
+`,
+);
+
+// .cpanel.yml: o cPanel se recusa a fazer deploy de um repositorio que nao tenha
+// este arquivo na branch em uso. Ele e gerado aqui, e nao na raiz do projeto,
+// porque quem o cPanel puxa e a branch `stable-website` — que contem o site ja
+// construido. Um .cpanel.yml na `main` copiaria codigo-fonte para o ar.
+await writeFile(
+  path.join(outDir, ".cpanel.yml"),
+  `---
+# Gerado por scripts/postbuild.mjs — nao edite direto na branch de deploy.
+# Copia o site construido para a pasta publica da hospedagem.
+deployment:
+  tasks:
+    - export DEPLOYPATH=${CPANEL_DEPLOY_PATH}
+    - /bin/mkdir -p "$DEPLOYPATH"
+    # Sem --delete: arquivos que ja existiam na pasta publica sao preservados.
+    # Os assets tem hash no nome, entao versoes antigas apenas acumulam.
+    - /usr/bin/rsync -a --exclude '.git' --exclude '.cpanel.yml' ./ "$DEPLOYPATH/"
 `,
 );
 

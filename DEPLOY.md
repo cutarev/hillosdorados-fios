@@ -1,59 +1,41 @@
 # Checklist de deploy — Hillosdorados Fios
 
-Site estático (SPA). Não há backend, banco nem variáveis de ambiente: o build
-gera uma pasta de arquivos e qualquer host estático serve.
+Site estático (SPA). Não há backend, banco nem variáveis de ambiente: o build gera
+uma pasta de arquivos e qualquer host estático serve.
+
+> **Onde ficam os dados editáveis:** `src/data/site.ts` (contato, domínio, textos
+> institucionais) e `src/data/products.ts` (os três produtos). Nada de conteúdo
+> precisa ser procurado dentro das páginas.
 
 ---
 
 ## 1. Bloqueadores — resolver antes de publicar
 
-Sem estes itens o site vai ao ar quebrado no que ele existe para fazer: gerar contato.
+- [ ] **Número de WhatsApp real.** `src/data/site.ts` está com o placeholder
+      `5511999999999`. Todo botão de WhatsApp do site usa esse número. Formato:
+      código do país + DDD + número, só dígitos (ex.: `5511987654321`).
+      O número exibido em tela é formatado sozinho a partir dele.
+- [ ] **E-mail real.** Também em `src/data/site.ts`. Confirmar que a caixa existe
+      e é monitorada.
+- [ ] **Domínio final** em `SITE_URL` (`src/data/site.ts`). Ele monta as URLs
+      absolutas de `og:image` e da tag canônica — com o valor errado, o preview de
+      link no WhatsApp não carrega a imagem.
+- [ ] **Testar os dois canais no celular** depois do deploy.
 
-- [ ] **Número de WhatsApp real.** Hoje `src/data/products.ts:5` tem o placeholder
-      `5511999999999`. Todo botão de WhatsApp da home e da página de produtos aponta
-      para esse número. Formato: código do país + DDD + número, só dígitos
-      (ex.: `5511987654321`).
-- [ ] **E-mail real.** `src/data/products.ts:6` está como `contato@hillosdorados.com.br`.
-      Confirmar que a caixa existe e é monitorada — se o domínio ainda não tem e-mail,
-      trocar por um endereço que funcione.
-- [ ] **Testar os dois canais no celular** depois do deploy: abrir `wa.me` e o `mailto:`
-      e confirmar que caem na conta certa.
+## 2. Já resolvido (não precisa refazer)
 
-## 2. Antes do primeiro deploy — recomendado
+- Favicon, logo do topo, ícone de iOS e imagem de preview de link, todos a partir
+  de `public/logo.svg`.
+- `og:image` (`public/og.jpg`, 1200×630), `og:url`, `og:site_name`, `og:locale` e
+  tag canônica.
+- Rodapé com ano dinâmico e contatos visíveis em texto.
+- Página de erro do servidor traduzida para português.
 
-- [ ] **`og:image`.** Não existe hoje. As páginas declaram
-      `twitter:card: summary_large_image`, então link compartilhado no WhatsApp e no
-      Instagram sai como um card grande e **vazio**. Adicionar uma imagem 1200×630 em
-      `public/og.jpg` e a meta `{ property: "og:image", content: "https://SEU_DOMINIO/og.jpg" }`
-      em `src/routes/__root.tsx`.
-- [ ] **URL canônica** — também ausente. Depois de fechar o domínio, adicionar
-      `{ rel: "canonical", href: "https://SEU_DOMINIO/" }` nos `links` do `__root.tsx`.
-- [ ] **`public/robots.txt`** já libera todos os buscadores. Se quiser indexação mais
-      rápida, acrescentar a linha `Sitemap: https://SEU_DOMINIO/sitemap.xml` e criar o
-      arquivo (são só 2 URLs: `/` e `/produtos`).
-- [ ] **Peso das imagens.** `src/assets/` soma ~500 KB em JPG (hero com 198 KB).
-      Aceitável, mas converter para WebP corta ~60% e o hero é a primeira coisa que
-      carrega no celular.
-- [ ] **`twitter:site` está como `@Hillosdorados`** em `src/routes/__root.tsx`.
-      Se esse perfil não existir, remover a meta.
+## 3. Pendências de conteúdo
 
-## 3. Desvincular da Lovable — o que sobrou fora do código
-
-O código já está limpo (ver commit "Remove todo o acoplamento com a Lovable").
-Estes passos são no GitHub e só você pode fazer:
-
-- [ ] **Remover o GitHub App da Lovable do repositório:**
-      `github.com/settings/installations` → Lovable → _Configure_ → tirar
-      `hillosdorados-fios` da lista de repositórios (ou _Uninstall_, se não usar em
-      outro projeto). Enquanto o app estiver instalado, ele mantém permissão de
-      escrita e pode voltar a commitar na `main`.
-- [ ] **Arquivar ou apagar o projeto no painel da Lovable**, para não haver um editor
-      publicando por cima do repositório.
-- [ ] **Conferir os colaboradores e webhooks:** Settings → Collaborators e
-      Settings → Webhooks. Remover o que for da Lovable.
-- [ ] Os commits antigos assinados por `gpt-engineer-app[bot]` continuam no histórico.
-      Isso é registro do passado e **não** é vínculo ativo — não reescreva o histórico
-      só por causa disso.
+Estão listadas em `~/Documentos/hillosdorados-pendencias.md`, para levantar com o
+dono do site: unidade correta da bitola, razão social, CNPJ, endereço, prazos,
+pedido mínimo e afins.
 
 ## 4. Build
 
@@ -66,78 +48,138 @@ npm run preview # confere o resultado localmente antes de publicar
 O build termina imprimindo o conteúdo da pasta. Deve conter:
 
 ```
-index.html  404.html  _shell.html  _redirects  .htaccess  assets/  favicon.ico  robots.txt
+.cpanel.yml  .htaccess  _redirects  _shell.html  404.html  index.html
+apple-touch-icon.png  assets/  favicon.ico  favicon.svg  logo.svg  og.jpg  robots.txt
 ```
 
-> **Se `index.html` não estiver na lista, não faça o deploy.** É exatamente esse o
-> problema que derrubava a raiz do site antes: o TanStack Start em modo SPA emite só
-> `_shell.html`, e nenhum host serve esse nome como página inicial. `scripts/postbuild.mjs`
-> resolve isso; se ele falhar, o build sai com erro em vez de publicar algo quebrado.
+> **Se `index.html` não estiver na lista, não faça o deploy.** O TanStack Start em
+> modo SPA emite só `_shell.html`, e nenhum host serve esse nome como página
+> inicial. `scripts/postbuild.mjs` resolve isso; se ele falhar, o build sai com
+> erro em vez de publicar algo quebrado.
 
-## 5. Publicar
+## 5. Publicar na HostGator (cPanel + Git) — caminho principal
 
-### Caminho A — CI já configurado (branch `stable-website`)
+### Como as peças se encaixam
 
-É o que o repositório faz hoje: `.github/workflows/deploy.yml` roda a cada push na
-`main` e joga a pasta pronta na branch `stable-website`.
+A hospedagem compartilhada **não tem Node.js**, então ela não consegue rodar o
+build. Quem constrói é o GitHub Actions:
 
-- [ ] `git push origin main`
-- [ ] Acompanhar em **Actions** → "Build e Deploy para stable-website" (verde ≈ 1–2 min)
-- [ ] Confirmar que a branch `stable-website` recebeu `index.html` na raiz
-- [ ] Apontar a hospedagem para essa branch: - **GitHub Pages:** Settings → Pages → Source: _Deploy from a branch_ →
-      branch `stable-website`, pasta `/ (root)`. - **Hospedagem Apache/cPanel:** puxar a `stable-website` por Git Version Control
-      ou baixar o ZIP e subir o conteúdo para `public_html/`. O `.htaccess` já vai junto.
+```
+push na main  →  GitHub Actions roda npm ci + npm run build
+              →  publica a pasta pronta na branch stable-website
+              →  cPanel puxa a stable-website e copia para public_html
+```
 
-### Caminho B — Netlify / Cloudflare Pages / Vercel
+Por isso o cPanel precisa estar na branch **`stable-website`**, e não na `main`.
+A `main` só tem código-fonte — publicá-la colocaria arquivos `.tsx` no ar.
 
-Mais simples que o caminho A e dispensa a branch intermediária.
+### Sobre o `.cpanel.yml`
+
+O cPanel se recusa a fazer deploy sem esse arquivo na branch em uso. Ele é gerado
+automaticamente pelo `scripts/postbuild.mjs` dentro da pasta de build, então ele
+já chega na `stable-website` junto com o site. **Não crie um `.cpanel.yml` na
+`main`** — isso faria o cPanel publicar código-fonte.
+
+O caminho de destino é `/home2/joaol109/public_html`. Para mudar (subdomínio,
+outro domínio), edite `CPANEL_DEPLOY_PATH` em `scripts/postbuild.mjs` ou exporte
+a variável antes do build.
+
+### Passo a passo
+
+- [ ] **1.** `git push origin main`
+- [ ] **2.** Em **Actions** no GitHub, esperar o workflow "Build e Deploy para
+      stable-website" ficar verde (≈ 1–2 min). Ele cria a branch `stable-website`
+      na primeira execução.
+- [ ] **3.** No cPanel → **Git™ Version Control** → _Manage_ no repositório →
+      trocar a branch em uso de `main` para `stable-website`.
+      Se a interface não oferecer a troca, faça por SSH:
+
+      ```sh
+              cd /home2/joaol109/repositories/hillosdorados-fios
+              git fetch origin
+              git checkout -B stable-website origin/stable-website
+              git status          # precisa dizer "nothing to commit, working tree clean"
+              ```
+
+- [ ] **4.** Aba **Pull or Deploy** → **Update from Remote** (puxa o que o Actions
+      publicou)
+- [ ] **5.** **Deploy HEAD Commit** (roda o `.cpanel.yml` e copia para `public_html`)
+
+A partir daí, cada atualização é: push na `main` → esperar o Actions → _Update from
+Remote_ → _Deploy HEAD Commit_. Os dois últimos cliques são manuais; o cPanel só
+faz deploy automático em repositórios hospedados nele mesmo.
+
+### "The system cannot deploy"
+
+O cPanel mostra essa caixa com as duas exigências sempre que o deploy é bloqueado,
+sem dizer qual delas falhou:
+
+1. **`.cpanel.yml` válido existe** — resolvido acima, desde que a branch em uso
+   seja a `stable-website`.
+2. **Nenhuma alteração não commitada na branch em uso** — o cPanel mantém um clone
+   próprio em `/home2/joaol109/repositories/hillosdorados-fios`. Se qualquer
+   arquivo ali tiver sido alterado fora do Git (edição pelo Gerenciador de
+   Arquivos, um deploy anterior que escreveu dentro da pasta, mudança de
+   permissão), o Git vê "changes not staged" e o cPanel trava — ele se recusa a
+   sobrescrever trabalho que possa ser seu. Para conferir e limpar, por SSH:
+
+   ```sh
+   cd /home2/joaol109/repositories/hillosdorados-fios
+   git status                       # mostra o que está sujo
+   git checkout -- .                # descarta alterações em arquivos versionados
+   git clean -fd                    # remove arquivos que não são do repositório
+   ```
+
+   Rode `git status` antes de descartar: se houver algo que você queira manter,
+   copie para fora primeiro. Esses comandos apagam alterações locais.
+
+## 6. Alternativas de publicação
+
+### Netlify / Cloudflare Pages / Vercel
+
+Dispensa a branch intermediária e o cPanel.
 
 - [ ] Conectar o repositório pelo painel do serviço
-- [ ] Build command: `npm run build`
-- [ ] Publish directory: `dist/client`
-- [ ] Node version: `22`
-- [ ] O `_redirects` gerado no build já cuida do fallback de rotas — nada a configurar
+- [ ] Build command: `npm run build` · Publish directory: `dist/client` · Node: `22`
+- [ ] O `_redirects` gerado no build já cuida do fallback de rotas
 
-### Caminho C — upload manual (FTP)
+### Upload manual por FTP
 
 - [ ] `npm run build`
-- [ ] Subir **todo o conteúdo** de `dist/client/` (incluindo os ocultos `.htaccess`)
-      para a raiz pública do servidor
-- [ ] Muitos clientes de FTP escondem arquivos que começam com ponto — ligar a exibição
-      de ocultos, senão as rotas quebram
+- [ ] Subir **todo o conteúdo** de `dist/client/` para `public_html`
+- [ ] Ligar a exibição de arquivos ocultos no cliente de FTP, senão o `.htaccess`
+      fica para trás e as rotas quebram
 
-## 6. Domínio e HTTPS
+## 7. Domínio e HTTPS
 
-- [ ] Apontar o DNS para o host (registro `A` ou `CNAME`, conforme o serviço)
-- [ ] Emitir o certificado HTTPS (automático em Pages, Netlify, Cloudflare e Vercel)
+- [ ] Apontar o DNS para a hospedagem
+- [ ] Emitir o certificado HTTPS (na HostGator, AutoSSL no cPanel)
 - [ ] Forçar redirect de `http://` para `https://`
 - [ ] Definir uma versão só como oficial — `www` **ou** raiz — e redirecionar a outra
+- [ ] Conferir que `SITE_URL` em `src/data/site.ts` bate com a versão escolhida
 
-## 7. Verificação pós-deploy
+## 8. Verificação pós-deploy
 
-Testar no domínio final, **um a um**:
-
-- [ ] `https://SEU_DOMINIO/` carrega a home com o hero e as 3 fotos de produto
+- [ ] `https://SEU_DOMINIO/` carrega a home com o hero e as 3 fotos
 - [ ] `https://SEU_DOMINIO/produtos` carrega **digitando a URL direto no navegador**
-      (não só clicando no menu) — é isso que valida o fallback de SPA do host
+      — é isso que valida o fallback de SPA do host
 - [ ] Recarregar (F5) dentro de `/produtos` continua funcionando
-- [ ] Uma URL inexistente, ex. `/qualquer-coisa`, mostra a página 404 do site
-- [ ] Botão **WhatsApp** abre a conversa com o número certo
-- [ ] Botão **E-mail** abre o cliente de e-mail com o assunto preenchido
-- [ ] Nos cards da home, "Detalhes do produto" leva à âncora certa em `/produtos`
-- [ ] Layout no celular: menu, hero e cards (o menu do topo some abaixo de `md` — é
-      intencional, mas confira se a navegação ainda faz sentido no telefone)
+- [ ] `/qualquer-coisa` mostra a página 404 do site
+- [ ] Botão e número do WhatsApp abrem a conversa certa
+- [ ] Botão e endereço de e-mail abrem o cliente com o assunto preenchido
+- [ ] Ícone do cone aparece na aba do navegador
+- [ ] Colar o link no WhatsApp e ver se o preview mostra a imagem com o logo
+- [ ] Abrir no celular: nenhuma das páginas deve rolar para os lados
 - [ ] Console do navegador (F12) sem erros em vermelho
-- [ ] Colar o link no WhatsApp e ver como sai o preview
 
-## 8. Se der errado
+## 9. Se der errado
 
 - **Raiz dá 404:** falta `index.html` na pasta publicada — ver seção 4.
 - **Home funciona, `/produtos` dá 404 ao recarregar:** o host não está aplicando o
-  fallback de SPA. Apache → conferir se o `.htaccess` subiu e se `AllowOverride` está
-  ligado. Netlify/CF → conferir o `_redirects`. GitHub Pages → é o `404.html` que faz
-  esse papel.
-- **Página em branco com erro de MIME ou 404 nos assets:** o site está numa subpasta.
-  Configurar `base` no `vite.config.ts`.
-- **Rollback:** `git revert <commit>` na `main` e deixar o CI republicar. No caminho A
-  também dá para reverter direto a branch `stable-website`.
+  fallback. Apache/HostGator → conferir se o `.htaccess` subiu e se `AllowOverride`
+  está habilitado. Netlify/CF → conferir o `_redirects`.
+- **Página em branco com 404 nos assets:** o site está numa subpasta. Configurar
+  `base` no `vite.config.ts`.
+- **Preview de link sem imagem:** `SITE_URL` não bate com o domínio real.
+- **Rollback:** `git revert <commit>` na `main`, esperar o Actions e repetir
+  _Update from Remote_ + _Deploy HEAD Commit_.
