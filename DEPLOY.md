@@ -49,8 +49,13 @@ O build termina imprimindo o conteúdo da pasta. Deve conter:
 
 ```
 .cpanel.yml  .htaccess  _redirects  _shell.html  404.html  index.html
-apple-touch-icon.png  assets/  favicon.ico  favicon.svg  logo.svg  og.jpg  robots.txt
+produtos/index.html  sitemap.xml  robots.txt  llms.txt
+apple-touch-icon.png  assets/  favicon.ico  favicon.svg  logo.svg  og.jpg
 ```
+
+`index.html` e `produtos/index.html` sao paginas **ja renderizadas** — abra uma
+delas num editor e o texto do site tem que estar la. Se vierem com ~3,5 KB e sem
+texto, o prerender nao rodou e o site fica invisivel para os robos das LLMs.
 
 > **Se `index.html` não estiver na lista, não faça o deploy.** O TanStack Start em
 > modo SPA emite só `_shell.html`, e nenhum host serve esse nome como página
@@ -99,11 +104,11 @@ a variável antes do build.
       Se a interface não oferecer a troca, faça por SSH:
 
       ```sh
-                              cd /home2/joaol109/repositories/hillosdorados-fios
-                              git fetch origin
-                              git checkout -B stable-website origin/stable-website
-                              git status          # precisa dizer "nothing to commit, working tree clean"
-                              ```
+                                  cd /home2/joaol109/repositories/hillosdorados-fios
+                                  git fetch origin
+                                  git checkout -B stable-website origin/stable-website
+                                  git status          # precisa dizer "nothing to commit, working tree clean"
+                                  ```
 
 - [ ] **4.** Aba **Pull or Deploy** → **Update from Remote** (puxa o que o Actions
       publicou)
@@ -176,7 +181,34 @@ Dispensa a branch intermediária e o cPanel.
 - [ ] Abrir no celular: nenhuma das páginas deve rolar para os lados
 - [ ] Console do navegador (F12) sem erros em vermelho
 
-## 9. Se der errado
+## 9. Colocar no Google e nos assistentes de IA
+
+Depois que o site estiver no ar com HTTPS:
+
+- [ ] **Google Search Console** (`search.google.com/search-console`): adicionar a
+      propriedade, validar (o jeito mais simples e o registro TXT no Editor de
+      Zona DNS do cPanel) e enviar `https://SEU_DOMINIO/sitemap.xml`.
+      Depois, usar _Inspecao de URL_ → _Solicitar indexacao_ na home e em
+      `/produtos` para nao esperar o rastreio natural.
+- [ ] **Bing Webmaster Tools** (`bing.com/webmasters`): da para importar direto do
+      Search Console. Vale porque o Bing alimenta as respostas do Copilot.
+- [ ] **Google Empresas** (`business.google.com`): e o que faz a empresa aparecer
+      no Maps e nas buscas locais. Exige endereco — esta na lista de pendencias.
+- [ ] Conferir os dados estruturados em `search.google.com/test/rich-results`
+- [ ] Conferir a previa do link em `developers.facebook.com/tools/debug/`
+
+O que ja esta pronto no codigo e nao precisa de acao: HTML pre-renderizado (as
+paginas chegam com o conteudo escrito, sem depender de JavaScript), `sitemap.xml`,
+`robots.txt` liberando explicitamente GPTBot, ClaudeBot, PerplexityBot, CCBot e
+companhia, dados estruturados schema.org e `llms.txt`.
+
+> Uma expectativa honesta: aparecer nas respostas de assistentes de IA nao e algo
+> que se configura, e consequencia de o site ser rastreavel e ter conteudo que
+> responda perguntas reais. O que foi feito remove os obstaculos tecnicos. O que
+> mais ajuda daqui pra frente e conteudo: explicar o que e fio termodegradavel,
+> para que serve, como escolher a bitola — texto que hoje o site nao tem.
+
+## 10. Se der errado
 
 - **Raiz dá 404:** falta `index.html` na pasta publicada — ver seção 4.
 - **Home funciona, `/produtos` dá 404 ao recarregar:** o host não está aplicando o
