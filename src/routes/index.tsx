@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import heroThread from "../assets/hero-thread.jpg";
 import { PRODUCTS } from "../data/products";
+import { SITE_URL } from "../data/site";
 import { EMAIL, EMAIL_LINK, WHATSAPP_LINK, formatWhatsApp } from "../data/site";
 import { BrandMark } from "../components/brand-mark";
 import { SiteFooter } from "../components/site-footer";
@@ -26,6 +27,7 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
   }),
   component: Index,
 });

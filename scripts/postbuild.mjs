@@ -125,7 +125,10 @@ async function collectRoutes(dir, prefix = "") {
   for (const entry of (await readdir(dir)).sort()) {
     const full = path.join(dir, entry);
     if (entry === "index.html") {
-      routes.push(prefix === "" ? "/" : prefix);
+      // Barra no final: e a URL que o Apache serve com 200. Sem ela ele
+      // responde 301, e um sitemap cheio de redirecionamento e desperdicio de
+      // rastreio.
+      routes.push(prefix === "" ? "/" : `${prefix}/`);
       // /404 fica de fora: e rota tecnica, nao pagina do site.
     } else if (!entry.startsWith(".") && entry !== "assets" && entry !== "404") {
       const info = await stat(full);

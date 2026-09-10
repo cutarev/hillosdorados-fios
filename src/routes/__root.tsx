@@ -96,7 +96,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
-      { rel: "canonical", href: `${SITE_URL}/` },
+      // Sem canonical aqui: `links` nao e deduplicado entre raiz e rota, entao
+      // uma canonical na raiz sairia junto com a da pagina — duas canonical
+      // conflitantes fazem o Google descartar o sinal. Cada rota declara a sua.
     ],
     scripts: [jsonLdScript(organizationSchema())],
   }),

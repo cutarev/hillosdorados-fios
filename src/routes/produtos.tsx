@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PRODUCTS } from "../data/products";
-import { EMAIL, WHATSAPP_NUMBER } from "../data/site";
+import { EMAIL, SITE_URL, WHATSAPP_NUMBER } from "../data/site";
 import { jsonLdScript, productListSchema } from "../data/structured-data";
 import { BrandMark } from "../components/brand-mark";
 import { SiteFooter } from "../components/site-footer";
@@ -24,8 +24,14 @@ export const Route = createFileRoute("/produtos")({
           "Linha de fios de nylon termodegradáveis para malharia: bitolas 30mm e 50mm, cones em tubete colorido, venda por quilo.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/produtos/` },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    // Sem esta linha, a pagina herda a canonical da raiz e passa a declarar que
+    // a versao oficial dela e a home — o que faz o Google descartar /produtos do
+    // indice. A barra no final e proposital: e a URL que responde 200; sem ela o
+    // Apache manda um 301 para a versao com barra.
+    links: [{ rel: "canonical", href: `${SITE_URL}/produtos/` }],
     scripts: [jsonLdScript(productListSchema())],
   }),
   component: Produtos,
