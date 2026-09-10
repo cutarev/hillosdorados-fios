@@ -11,28 +11,8 @@ import type { ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { BRAND_NAME, SITE_DESCRIPTION, SITE_URL, TAGLINE } from "../data/site";
-
-function NotFoundComponent() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="font-display text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Página não encontrada</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          A página que você procura não existe ou foi movida.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Voltar ao início
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-}
+import { jsonLdScript, organizationSchema } from "../data/structured-data";
+import { NotFound } from "../components/not-found";
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
@@ -118,10 +98,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
       { rel: "canonical", href: `${SITE_URL}/` },
     ],
+    scripts: [jsonLdScript(organizationSchema())],
   }),
   shellComponent: RootShell,
   component: RootComponent,
-  notFoundComponent: NotFoundComponent,
+  notFoundComponent: NotFound,
   errorComponent: ErrorComponent,
 });
 

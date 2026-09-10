@@ -1,7 +1,10 @@
 import { EMAIL, EMAIL_LINK, TAGLINE, WHATSAPP_LINK, formatWhatsApp } from "../data/site";
 
 export function SiteFooter() {
-  // Calculado na renderizacao para o rodape nao envelhecer sozinho na virada do ano.
+  // Calculado na renderizacao para o rodape nao envelhecer sozinho na virada do
+  // ano. Como as paginas sao prerenderizadas, o valor gravado no HTML e o do
+  // build; suppressHydrationWarning evita o aviso do React no unico caso em que
+  // os dois divergem — alguem com a pagina aberta na virada do ano.
   const year = new Date().getFullYear();
 
   return (
@@ -35,7 +38,10 @@ export function SiteFooter() {
         </div>
 
         <div className="md:text-right">
-          <p className="text-[10px] uppercase tracking-[0.25em] text-paper-white/40">
+          <p
+            className="text-[10px] uppercase tracking-[0.25em] text-paper-white/40"
+            suppressHydrationWarning
+          >
             Brasil • {year}
           </p>
         </div>

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PRODUCTS } from "../data/products";
 import { EMAIL, WHATSAPP_NUMBER } from "../data/site";
+import { jsonLdScript, productListSchema } from "../data/structured-data";
 import { BrandMark } from "../components/brand-mark";
 import { SiteFooter } from "../components/site-footer";
 
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/produtos")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    scripts: [jsonLdScript(productListSchema())],
   }),
   component: Produtos,
 });

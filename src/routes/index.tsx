@@ -58,9 +58,12 @@ function Index() {
             <span className="text-gold-primary text-[11px] font-bold tracking-[0.25em] uppercase mb-6">
               Fios de nylon para malharia
             </span>
-            {/* text-3xl no celular: "termodegradável" e larga demais para 390px
-                em text-4xl e empurrava a pagina para o lado. */}
-            <h1 className="font-display text-3xl sm:text-4xl md:text-6xl leading-[1.05] mb-8 break-words">
+            {/* "termodegradavel" tem 15 letras: em text-6xl nao cabe na coluna
+                do heroi e quebrava no meio da palavra; em text-4xl estourava a
+                largura do celular. Os tamanhos abaixo sao os que cabem inteiros
+                em cada faixa, com hyphens-auto (o <html> declara lang="pt-BR",
+                entao o navegador hifeniza em silaba) como rede de seguranca. */}
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] mb-8 hyphens-auto">
               Fio de nylon termodegradável, em cone, vendido por quilo.
             </h1>
             <p className="text-base text-paper-white/70 max-w-md leading-relaxed mb-10">
