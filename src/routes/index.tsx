@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import heroThread from "../assets/hero-thread.jpg";
 import { PRODUCTS, WHATSAPP_NUMBER, EMAIL } from "../data/products";
 
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -34,9 +33,7 @@ function Index() {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-industrial-black text-paper-white">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-8 h-16">
-          <div className="font-display text-lg font-bold tracking-[0.35em]">
-            HILLOSDORADOS
-          </div>
+          <div className="font-display text-lg font-bold tracking-[0.35em]">HILLOSDORADOS</div>
           <div className="hidden md:flex gap-10 text-[11px] uppercase tracking-[0.2em] font-semibold">
             <Link to="/produtos" className="hover:text-gold-primary transition-colors">
               Produtos
@@ -62,8 +59,7 @@ function Index() {
               Fio de nylon termodegradável, em cone, vendido por quilo.
             </h1>
             <p className="text-base text-paper-white/70 max-w-md leading-relaxed mb-10">
-              Fornecimento para malharias. Repasse por quilo, cotação direta
-              por WhatsApp ou e-mail.
+              Fornecimento para malharias. Repasse por quilo, cotação direta por WhatsApp ou e-mail.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -166,12 +162,10 @@ function Index() {
             <span className="text-gold-primary text-[11px] font-bold tracking-[0.25em] uppercase">
               Especificações
             </span>
-            <h2 className="font-display text-3xl mt-4 mb-6">
-              Aplicação exclusiva em malharia
-            </h2>
+            <h2 className="font-display text-3xl mt-4 mb-6">Aplicação exclusiva em malharia</h2>
             <p className="text-paper-white/70 leading-relaxed">
-              Fios de nylon termodegradáveis destinados exclusivamente a
-              malharias. Fornecidos em cone e comercializados por quilo.
+              Fios de nylon termodegradáveis destinados exclusivamente a malharias. Fornecidos em
+              cone e comercializados por quilo.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-px bg-white/10 border border-white/10">
@@ -199,8 +193,7 @@ function Index() {
         <div className="max-w-3xl mx-auto px-8 text-center">
           <h2 className="font-display text-3xl mb-4">Cotação e pedidos</h2>
           <p className="text-industrial-black/60 mb-10">
-            Informe a bitola, a cor e a quantidade em quilos. Respondemos por
-            WhatsApp ou e-mail.
+            Informe a bitola, a cor e a quantidade em quilos. Respondemos por WhatsApp ou e-mail.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

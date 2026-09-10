@@ -38,10 +38,7 @@ function Produtos() {
             <Link to="/" className="hover:text-gold-primary transition-colors">
               Início
             </Link>
-            <Link
-              to="/produtos"
-              className="text-gold-primary"
-            >
+            <Link to="/produtos" className="text-gold-primary">
               Produtos
             </Link>
             <Link to="/" hash="contato" className="hover:text-gold-primary transition-colors">
@@ -60,19 +57,15 @@ function Produtos() {
             Fios de nylon termodegradáveis em cone
           </h1>
           <p className="text-paper-white/70 mt-6 max-w-xl leading-relaxed">
-            Fornecimento para malharias. Cones com tubete identificado por cor.
-            Comercialização por quilo.
+            Fornecimento para malharias. Cones com tubete identificado por cor. Comercialização por
+            quilo.
           </p>
         </div>
       </header>
 
       <main className="max-w-7xl mx-auto px-8 py-20 space-y-24">
         {PRODUCTS.map((p, i) => (
-          <article
-            key={p.slug}
-            id={p.slug}
-            className="grid md:grid-cols-2 gap-12 items-start"
-          >
+          <article key={p.slug} id={p.slug} className="grid md:grid-cols-2 gap-12 items-start">
             <img
               src={p.image}
               alt={p.alt}
@@ -88,9 +81,7 @@ function Produtos() {
                 {p.index}
               </span>
               <h2 className="font-display text-3xl mt-2 mb-5">{p.name}</h2>
-              <p className="text-industrial-black/70 leading-relaxed mb-8">
-                {p.detail}
-              </p>
+              <p className="text-industrial-black/70 leading-relaxed mb-8">{p.detail}</p>
 
               <dl className="text-sm border-t border-industrial-black/10">
                 {[
@@ -123,9 +114,7 @@ function Produtos() {
                   Cotar por WhatsApp
                 </a>
                 <a
-                  href={`mailto:${EMAIL}?subject=${encodeURIComponent(
-                    `Cotação — ${p.name}`,
-                  )}`}
+                  href={`mailto:${EMAIL}?subject=${encodeURIComponent(`Cotação — ${p.name}`)}`}
                   className="border border-industrial-black px-8 py-4 uppercase text-[11px] tracking-[0.2em] font-bold hover:bg-industrial-black hover:text-paper-white transition"
                 >
                   Cotar por e-mail

@@ -26,13 +26,13 @@ O site sobe em `http://localhost:3000`.
 
 ## Scripts
 
-| Comando            | O que faz                                        |
-| ------------------ | ------------------------------------------------ |
-| `npm run dev`      | Servidor de desenvolvimento com hot reload       |
-| `npm run build`    | Build de produção para `dist/`                   |
-| `npm run preview`  | Serve o build de produção localmente             |
-| `npm run lint`     | ESLint                                           |
-| `npm run format`   | Prettier                                         |
+| Comando           | O que faz                                  |
+| ----------------- | ------------------------------------------ |
+| `npm run dev`     | Servidor de desenvolvimento com hot reload |
+| `npm run build`   | Build de produção para `dist/`             |
+| `npm run preview` | Serve o build de produção localmente       |
+| `npm run lint`    | ESLint                                     |
+| `npm run format`  | Prettier                                   |
 
 ## Estrutura
 
@@ -50,4 +50,4 @@ Para alterar produtos, preço de contato ou canais de atendimento, edite
 
 ## Deploy
 
-Ver [DEPLOY.md](./DEPLOY.md).
+Passo a passo completo em [DEPLOY.md](./DEPLOY.md).
