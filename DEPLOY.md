@@ -90,16 +90,20 @@ a variável antes do build.
 - [ ] **2.** Em **Actions** no GitHub, esperar o workflow "Build e Deploy para
       stable-website" ficar verde (≈ 1–2 min). Ele cria a branch `stable-website`
       na primeira execução.
+- [ ] **2.1.** Abrir a branch `stable-website` no GitHub e confirmar que ela tem
+      `index.html` na raiz **e os arquivos ocultos `.cpanel.yml` e `.htaccess`**
+      (o GitHub mostra arquivos com ponto na listagem normal). Sem o `.cpanel.yml`
+      ali, o passo 5 vai falhar de novo.
 - [ ] **3.** No cPanel → **Git™ Version Control** → _Manage_ no repositório →
       trocar a branch em uso de `main` para `stable-website`.
       Se a interface não oferecer a troca, faça por SSH:
 
       ```sh
-              cd /home2/joaol109/repositories/hillosdorados-fios
-              git fetch origin
-              git checkout -B stable-website origin/stable-website
-              git status          # precisa dizer "nothing to commit, working tree clean"
-              ```
+                  cd /home2/joaol109/repositories/hillosdorados-fios
+                  git fetch origin
+                  git checkout -B stable-website origin/stable-website
+                  git status          # precisa dizer "nothing to commit, working tree clean"
+                  ```
 
 - [ ] **4.** Aba **Pull or Deploy** → **Update from Remote** (puxa o que o Actions
       publicou)
