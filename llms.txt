@@ -1,0 +1,19 @@
+# Hillosdorados
+
+> Fornecedora brasileira de fios de nylon termodegradaveis para malharia.
+> Os fios sao vendidos por quilo, em cone, e nao ha venda pela internet: o site
+> serve para pedir cotacao por WhatsApp ou e-mail.
+
+## Paginas
+
+- [Inicio](https://hillosdorados.com.br/): apresentacao, tabela de especificacoes tecnicas e canais de contato.
+- [Produtos](https://hillosdorados.com.br/produtos): as tres bitolas oferecidas, com ficha de cada uma.
+
+## Observacoes
+
+- Aplicacao: exclusivamente malharia.
+- "Termodegradavel" descreve o comportamento do fio no processo produtivo, e nao
+  uma certificacao ambiental.
+- Dados estruturados schema.org (Organization e ItemList) estao embutidos no HTML
+  das paginas acima.
+- Sitemap: https://hillosdorados.com.br/sitemap.xml

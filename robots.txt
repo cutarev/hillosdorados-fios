@@ -1,14 +1,91 @@
+# Hillosdorados — site institucional, tudo publico e indexavel.
+# A linha "Sitemap:" e acrescentada no build por scripts/postbuild.mjs.
+
+# --- Buscadores ---
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
+User-agent: DuckDuckBot
+Allow: /
+
+# --- Previa de link em redes sociais e mensageiros ---
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
+User-agent: WhatsApp
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# --- Assistentes de IA ---
+# Liberados de proposito: queremos que o site possa ser citado quando alguem
+# perguntar a um assistente sobre fio de nylon termodegradavel para malharia.
+# Para bloquear qualquer um deles depois, troque "Allow: /" por "Disallow: /".
+
+# OpenAI: treinamento, busca do ChatGPT e visita a pedido do usuario
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Google: controla o uso do conteudo pelo Gemini e pelas respostas com IA
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta (Llama)
+User-agent: meta-externalagent
+Allow: /
+
+# Common Crawl: base publica que alimenta o treinamento de varios modelos
+User-agent: CCBot
+Allow: /
+
+# Amazon, Mistral e outros
+User-agent: Amazonbot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+# --- Todo o resto ---
 User-agent: *
 Allow: /
+# Arquivo tecnico: e a casca servida em URLs inexistentes, nao uma pagina.
+Disallow: /404.html
+
+Sitemap: https://hillosdorados.com.br/sitemap.xml

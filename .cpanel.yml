@@ -5,6 +5,16 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home2/joaol109/public_html
     - /bin/mkdir -p "$DEPLOYPATH"
-    # Sem --delete: arquivos que ja existiam na pasta publica sao preservados.
-    # Os assets tem hash no nome, entao versoes antigas apenas acumulam.
-    - /usr/bin/rsync -a --exclude '.git' --exclude '.cpanel.yml' ./ "$DEPLOYPATH/"
+    # -rltD em vez de -a: -a inclui -p -o -g, que copiariam permissao, dono e
+    # grupo da pasta do repositorio (0700, grupo do usuario) para a public_html.
+    # O Apache precisa que ela seja 0750 com grupo nobody; com 0700 ele perde
+    # acesso e o site inteiro passa a responder 403.
+    # --chmod fixa permissao previsivel em tudo que e copiado.
+    # Sem --delete: o que ja existia na pasta publica e preservado; os assets
+    # tem hash no nome, entao versoes antigas apenas acumulam.
+    - /usr/bin/rsync -rltD --chmod=D755,F644 --exclude '.git' --exclude '.cpanel.yml' ./ "$DEPLOYPATH/"
+    # Rede de seguranca. 755 e nao 750 de proposito: 750 so funciona se a pasta
+    # continuar no grupo nobody, que e como o Apache le. Se algum deploy antigo
+    # ja tiver trocado o grupo, 750 mantem o site em 403; 755 funciona nos dois
+    # casos. Nao expoe nada: e uma pasta cujo conteudo ja e publico na web.
+    - /bin/chmod 755 "$DEPLOYPATH"

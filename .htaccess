@@ -1,12 +1,10 @@
-# SPA estatica — gerado por scripts/postbuild.mjs
+# Site estatico prerenderizado — gerado por scripts/postbuild.mjs
 DirectoryIndex index.html
 
-RewriteEngine On
-
-# Rotas inexistentes caem no index.html para o roteador do cliente resolver
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.html [L]
+# Cada rota do site e um arquivo HTML de verdade, gerado pelo prerender.
+# O que nao existe recebe 404 com status 404 mesmo; o 404.html carrega o
+# roteador, que monta a pagina de "nao encontrada" do site.
+ErrorDocument 404 /404.html
 
 <IfModule mod_headers.c>
   <FilesMatch "\.html$">
