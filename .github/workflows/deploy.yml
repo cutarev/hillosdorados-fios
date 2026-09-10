@@ -1,0 +1,62 @@
+name: "Build e Deploy para stable-website"
+
+on:
+  # Aciona o workflow em pushes para a branch 'main'
+  push:
+    branches:
+      - main
+  # Permite rodar este workflow manualmente pela aba Actions
+  workflow_dispatch:
+
+# 'contents: write' e necessario para o deploy fazer push na branch stable-website
+permissions:
+  contents: write
+
+# Evita dois deploys simultaneos disputando a branch stable-website
+concurrency:
+  group: deploy-stable-website
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout do repositorio"
+        uses: actions/checkout@v4
+
+      - name: "Configurar Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      # Instala a partir do package-lock.json (build reproduzivel)
+      - name: "Instalar dependencias"
+        run: npm ci
+
+      # 'npm run build' ja roda scripts/postbuild.mjs, que gera
+      # index.html, 404.html, _redirects e .htaccess na pasta de saida
+      - name: "Rodar build"
+        run: npm run build
+
+      # O output do TanStack Start pode cair em dist/ ou dist/client/
+      - name: "Localizar pasta de saida"
+        id: locate
+        run: |
+          if [ -f dist/client/index.html ]; then
+            echo "deploy_dir=dist/client" >> "$GITHUB_OUTPUT"
+          elif [ -f dist/index.html ]; then
+            echo "deploy_dir=dist" >> "$GITHUB_OUTPUT"
+          else
+            echo "::error::index.html nao encontrado em dist/ nem dist/client/. Verifique o build e scripts/postbuild.mjs."
+            exit 1
+          fi
+
+      - name: "Deploy para a branch stable-website"
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: stable-website
+          folder: ${{ steps.locate.outputs.deploy_dir }}
+          clean: true
