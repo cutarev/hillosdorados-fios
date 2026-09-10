@@ -107,9 +107,11 @@ deployment:
     # Sem --delete: o que ja existia na pasta publica e preservado; os assets
     # tem hash no nome, entao versoes antigas apenas acumulam.
     - /usr/bin/rsync -rltD --chmod=D755,F644 --exclude '.git' --exclude '.cpanel.yml' ./ "$DEPLOYPATH/"
-    # Rede de seguranca: devolve a public_html a permissao que o Apache espera,
-    # mesmo que algo antes tenha mexido nela.
-    - /bin/chmod 750 "$DEPLOYPATH"
+    # Rede de seguranca. 755 e nao 750 de proposito: 750 so funciona se a pasta
+    # continuar no grupo nobody, que e como o Apache le. Se algum deploy antigo
+    # ja tiver trocado o grupo, 750 mantem o site em 403; 755 funciona nos dois
+    # casos. Nao expoe nada: e uma pasta cujo conteudo ja e publico na web.
+    - /bin/chmod 755 "$DEPLOYPATH"
 `,
 );
 
