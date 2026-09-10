@@ -1,0 +1,10 @@
+---
+# Gerado por scripts/postbuild.mjs — nao edite direto na branch de deploy.
+# Copia o site construido para a pasta publica da hospedagem.
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home2/joaol109/public_html
+    - /bin/mkdir -p "$DEPLOYPATH"
+    # Sem --delete: arquivos que ja existiam na pasta publica sao preservados.
+    # Os assets tem hash no nome, entao versoes antigas apenas acumulam.
+    - /usr/bin/rsync -a --exclude '.git' --exclude '.cpanel.yml' ./ "$DEPLOYPATH/"
