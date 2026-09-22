@@ -11,16 +11,16 @@ uma pasta de arquivos e qualquer host estático serve.
 
 ## 1. Bloqueadores — resolver antes de publicar
 
-- [ ] **Número de WhatsApp real.** `src/data/site.ts` está com o placeholder
-      `5511999999999`. Todo botão de WhatsApp do site usa esse número. Formato:
-      código do país + DDD + número, só dígitos (ex.: `5511987654321`).
-      O número exibido em tela é formatado sozinho a partir dele.
-- [ ] **E-mail real.** Também em `src/data/site.ts`. Confirmar que a caixa existe
-      e é monitorada.
-- [ ] **Domínio final** em `SITE_URL` (`src/data/site.ts`). Ele monta as URLs
-      absolutas de `og:image` e da tag canônica — com o valor errado, o preview de
-      link no WhatsApp não carrega a imagem.
-- [ ] **Testar os dois canais no celular** depois do deploy.
+- [ ] **Unidade da bitola.** O site diz "50mm" e "30mm"; fio de nylon para
+      malharia costuma ser medido em denier ou dtex. Está na lista de pendências
+      com o dono (`~/Documentos/hillosdorados-pendencias.md`) e afeta o nome dos
+      produtos, o título que aparece no Google e a tabela de especificações.
+- [ ] **HTTPS.** O AutoSSL emitiu o certificado, mas o Apache ainda serve o
+      curinga da HostGator na porta 443 — depende de ticket com eles.
+
+Contato e domínio já estão corretos em `src/data/site.ts`: WhatsApp
++55 (11) 98240-8464, e-mail hillosdorados@gmail.com, domínio
+https://hillosdorados.com.br.
 
 ## 2. Já resolvido (não precisa refazer)
 
@@ -104,11 +104,11 @@ a variável antes do build.
       Se a interface não oferecer a troca, faça por SSH:
 
       ```sh
-                                          cd /home2/joaol109/repositories/hillosdorados-fios
-                                          git fetch origin
-                                          git checkout -B stable-website origin/stable-website
-                                          git status          # precisa dizer "nothing to commit, working tree clean"
-                                          ```
+                                              cd /home2/joaol109/repositories/hillosdorados-fios
+                                              git fetch origin
+                                              git checkout -B stable-website origin/stable-website
+                                              git status          # precisa dizer "nothing to commit, working tree clean"
+                                              ```
 
 - [ ] **4.** Aba **Pull or Deploy** → **Update from Remote** (puxa o que o Actions
       publicou)
