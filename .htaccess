@@ -1,6 +1,14 @@
 # Site estatico prerenderizado — gerado por scripts/postbuild.mjs
 DirectoryIndex index.html
 
+# Forca HTTPS. Feito aqui porque a HostGator desabilita o botao "Force HTTPS
+# Redirect" do cPanel no dominio principal. A segunda condicao evita laco
+# infinito caso o TLS seja terminado num proxy antes do Apache.
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 # Cada rota do site e um arquivo HTML de verdade, gerado pelo prerender.
 # O que nao existe recebe 404 com status 404 mesmo; o 404.html carrega o
 # roteador, que monta a pagina de "nao encontrada" do site.
