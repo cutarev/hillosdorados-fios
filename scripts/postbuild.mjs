@@ -65,10 +65,18 @@ await writeFile(
   `# Site estatico prerenderizado — gerado por scripts/postbuild.mjs
 DirectoryIndex index.html
 
-# Forca HTTPS. Feito aqui porque a HostGator desabilita o botao "Force HTTPS
-# Redirect" do cPanel no dominio principal. A segunda condicao evita laco
-# infinito caso o TLS seja terminado num proxy antes do Apache.
+# Uma unica versao oficial do site: https, sem www. Feito aqui porque a
+# HostGator desabilita o botao "Force HTTPS Redirect" do cPanel no dominio
+# principal.
 RewriteEngine On
+
+# www -> raiz, ja saindo em https: um salto so, em vez de www/http -> www/https
+# -> raiz/https. O %1 vem do grupo capturado, entao vale para qualquer dominio.
+RewriteCond %{HTTP_HOST} ^www\\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# http -> https para o que sobrou. A segunda condicao evita laco infinito caso
+# o TLS seja terminado num proxy antes do Apache.
 RewriteCond %{HTTPS} !=on
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
