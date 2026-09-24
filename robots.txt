@@ -26,7 +26,7 @@ Allow: /
 
 # --- Assistentes de IA ---
 # Liberados de proposito: queremos que o site possa ser citado quando alguem
-# perguntar a um assistente sobre fio de nylon termodegradavel para malharia.
+# perguntar a um assistente sobre nylon monofilamento termo-soluvel para malharia.
 # Para bloquear qualquer um deles depois, troque "Allow: /" por "Disallow: /".
 
 # OpenAI: treinamento, busca do ChatGPT e visita a pedido do usuario
