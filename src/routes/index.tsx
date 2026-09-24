@@ -9,20 +9,20 @@ import { SiteFooter } from "../components/site-footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Hillosdorados | Fios de Nylon Termodegradáveis para Malharia" },
+      { title: "Hillosdorados | Nylon Monofilamento Termo-solúvel para Malharia" },
       {
         name: "description",
         content:
-          "Fios de nylon termodegradáveis para malharias. Bitolas 30mm e 50mm em cone, vendidos por quilo. Cotação direta por WhatsApp ou e-mail.",
+          "Nylon monofilamento termo-solúvel para separação de golas retilíneas. D122 0.10mm e D90 0.09mm em cone, vendidos por quilo. Cotação direta por WhatsApp ou e-mail.",
       },
       {
         property: "og:title",
-        content: "Hillosdorados | Fios de Nylon Termodegradáveis para Malharia",
+        content: "Hillosdorados | Nylon Monofilamento Termo-solúvel para Malharia",
       },
       {
         property: "og:description",
         content:
-          "Fios de nylon termodegradáveis para malharias. Bitolas 30mm e 50mm em cone, vendidos por quilo. Cotação direta por WhatsApp ou e-mail.",
+          "Nylon monofilamento termo-solúvel para separação de golas retilíneas. D122 0.10mm e D90 0.09mm em cone, vendidos por quilo. Cotação direta por WhatsApp ou e-mail.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -58,18 +58,20 @@ function Index() {
         <div className="max-w-7xl mx-auto grid md:grid-cols-2">
           <div className="min-w-0 px-8 py-24 flex flex-col justify-center">
             <span className="text-gold-primary text-[11px] font-bold tracking-[0.25em] uppercase mb-6">
-              Fios de nylon para malharia
+              Nylon monofilamento <span className="whitespace-nowrap">termo-solúvel</span>
             </span>
-            {/* "termodegradavel" tem 15 letras: em text-6xl nao cabe na coluna
-                do heroi e quebrava no meio da palavra; em text-4xl estourava a
-                largura do celular. Os tamanhos abaixo sao os que cabem inteiros
-                em cada faixa, com hyphens-auto (o <html> declara lang="pt-BR",
-                entao o navegador hifeniza em silaba) como rede de seguranca. */}
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] mb-8 hyphens-auto">
-              Fio de nylon termodegradável, em cone, vendido por quilo.
+            {/* Sem hifenizacao: os tamanhos sao os maiores em que "monofilamento"
+                (~8.7x o tamanho da fonte) cabe inteiro na coluna — 320px no
+                celular, meia tela a partir de md. text-balance equilibra as
+                linhas, e o nowrap impede "termo-" de ficar sozinho no fim da linha.
+                Subir um tamanho aqui faz a palavra estourar. */}
+            <h1 className="font-display text-[1.75rem] sm:text-4xl lg:text-5xl leading-[1.05] mb-8 text-balance">
+              Nylon monofilamento <span className="whitespace-nowrap">termo-solúvel</span> para
+              separação de golas retilíneas
             </h1>
             <p className="text-base text-paper-white/70 max-w-md leading-relaxed mb-10">
-              Fornecimento para malharias. Repasse por quilo, cotação direta por WhatsApp ou e-mail.
+              Solução para malharias que utilizam o processo de separação por vapor ou túnel de
+              aquecimento.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -133,15 +135,15 @@ function Index() {
                   <dl className="text-sm text-industrial-black/70 space-y-2 mb-8">
                     <div className="flex justify-between border-b border-industrial-black/10 pb-2">
                       <dt>Composição</dt>
-                      <dd className="font-medium text-industrial-black">Nylon</dd>
+                      <dd className="font-medium text-industrial-black">100% Nylon</dd>
                     </div>
                     <div className="flex justify-between border-b border-industrial-black/10 pb-2">
                       <dt>Tubete</dt>
                       <dd className="font-medium text-industrial-black">{p.tube}</dd>
                     </div>
                     <div className="flex justify-between border-b border-industrial-black/10 pb-2">
-                      <dt>Apresentação</dt>
-                      <dd className="font-medium text-industrial-black">Cone</dd>
+                      <dt>Cor</dt>
+                      <dd className="font-medium text-industrial-black">{p.color}</dd>
                     </div>
                     <div className="flex justify-between">
                       <dt>Venda</dt>
@@ -174,18 +176,18 @@ function Index() {
             </span>
             <h2 className="font-display text-3xl mt-4 mb-6">Aplicação exclusiva em malharia</h2>
             <p className="text-paper-white/70 leading-relaxed">
-              Fios de nylon termodegradáveis destinados exclusivamente a malharias. Fornecidos em
-              cone e comercializados por quilo.
+              Nylon monofilamento termo-solúvel destinado exclusivamente a malharias. Fornecido em
+              cone e comercializado por quilo.
             </p>
           </div>
           {/* Uma coluna no celular: em duas, cada celula fica com ~162px e
-              "Termodegradavel" nao cabe, empurrando a pagina para o lado. */}
+              "Termo-solúvel" nao cabe, empurrando a pagina para o lado. */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/10 border border-white/10">
             {[
               ["Material", "Nylon"],
-              ["Tipo", "Termodegradável"],
-              ["Bitolas", "30mm e 50mm"],
-              ["Cores", "Branco e preto"],
+              ["Tipo", "Termo-solúvel"],
+              ["Bitolas", "D122 0.10mm e D90 0.09mm"],
+              ["Cores", "Natural e preto"],
               ["Embalagem", "Cone"],
               ["Unidade de venda", "Quilo"],
             ].map(([label, value]) => (

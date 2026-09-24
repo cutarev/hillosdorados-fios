@@ -8,20 +8,20 @@ import { SiteFooter } from "../components/site-footer";
 export const Route = createFileRoute("/produtos")({
   head: () => ({
     meta: [
-      { title: "Produtos | Fios de Nylon Termodegradáveis — Hillosdorados" },
+      { title: "Produtos | Nylon Monofilamento Termo-solúvel — Hillosdorados" },
       {
         name: "description",
         content:
-          "Linha de fios de nylon termodegradáveis para malharia: bitolas 30mm e 50mm, cones em tubete colorido, venda por quilo.",
+          "Linha de nylon monofilamento termo-solúvel para malharia: D122 0.10mm e D90 0.09mm, cones em tubete colorido, venda por quilo.",
       },
       {
         property: "og:title",
-        content: "Produtos | Fios de Nylon Termodegradáveis — Hillosdorados",
+        content: "Produtos | Nylon Monofilamento Termo-solúvel — Hillosdorados",
       },
       {
         property: "og:description",
         content:
-          "Linha de fios de nylon termodegradáveis para malharia: bitolas 30mm e 50mm, cones em tubete colorido, venda por quilo.",
+          "Linha de nylon monofilamento termo-solúvel para malharia: D122 0.10mm e D90 0.09mm, cones em tubete colorido, venda por quilo.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_URL}/produtos/` },
@@ -63,7 +63,7 @@ function Produtos() {
             Linha de produtos
           </span>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl mt-5 max-w-3xl leading-[1.1] break-words">
-            Fios de nylon termodegradáveis em cone
+            Nylon monofilamento termo-solúvel em cone
           </h1>
           <p className="text-paper-white/70 mt-6 max-w-xl leading-relaxed">
             Fornecimento para malharias. Cones com tubete identificado por cor. Comercialização por
@@ -94,8 +94,8 @@ function Produtos() {
 
               <dl className="text-sm border-t border-industrial-black/10">
                 {[
-                  ["Composição", "Nylon"],
-                  ["Tipo", "Termodegradável"],
+                  ["Composição", "100% Nylon"],
+                  ["Tipo", "Termo-solúvel"],
                   ["Bitola", p.gauge],
                   ["Cor do fio", p.color],
                   ["Tubete", p.tube],
@@ -116,14 +116,14 @@ function Produtos() {
               <div className="flex flex-wrap gap-4 mt-8">
                 <a
                   href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                    `Olá, gostaria de cotação do ${p.name}.`,
+                    `Olá, gostaria de cotação do ${p.name} ${p.color.toLowerCase()}.`,
                   )}`}
                   className="bg-industrial-black text-paper-white px-8 py-4 uppercase text-[11px] tracking-[0.2em] font-bold hover:bg-gold-primary hover:text-industrial-black transition"
                 >
                   Cotar por WhatsApp
                 </a>
                 <a
-                  href={`mailto:${EMAIL}?subject=${encodeURIComponent(`Cotação — ${p.name}`)}`}
+                  href={`mailto:${EMAIL}?subject=${encodeURIComponent(`Cotação — ${p.name} ${p.color.toLowerCase()}`)}`}
                   className="border border-industrial-black px-8 py-4 uppercase text-[11px] tracking-[0.2em] font-bold hover:bg-industrial-black hover:text-paper-white transition"
                 >
                   Cotar por e-mail

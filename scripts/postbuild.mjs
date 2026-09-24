@@ -188,19 +188,20 @@ await writeFile(
   path.join(outDir, "llms.txt"),
   `# Hillosdorados
 
-> Fornecedora brasileira de fios de nylon termodegradaveis para malharia.
+> Fornecedora brasileira de nylon monofilamento termo-soluvel para malharia,
+> usado na separacao de golas retilineas por vapor ou tunel de aquecimento.
 > Os fios sao vendidos por quilo, em cone, e nao ha venda pela internet: o site
 > serve para pedir cotacao por WhatsApp ou e-mail.
 
 ## Paginas
 
 - [Inicio](${siteUrl}/): apresentacao, tabela de especificacoes tecnicas e canais de contato.
-- [Produtos](${siteUrl}/produtos): as tres bitolas oferecidas, com ficha de cada uma.
+- [Produtos](${siteUrl}/produtos): os tres fios oferecidos, com ficha de cada um.
 
 ## Observacoes
 
 - Aplicacao: exclusivamente malharia.
-- "Termodegradavel" descreve o comportamento do fio no processo produtivo, e nao
+- "Termo-soluvel" descreve o comportamento do fio no processo produtivo, e nao
   uma certificacao ambiental.
 - Dados estruturados schema.org (Organization e ItemList) estao embutidos no HTML
   das paginas acima.

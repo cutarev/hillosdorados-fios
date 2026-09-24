@@ -14,11 +14,11 @@ export const EMAIL = "hillosdorados@gmail.com";
 export const SITE_URL = "https://hillosdorados.com.br";
 
 export const BRAND_NAME = "Hillosdorados";
-export const TAGLINE = "Fios de nylon termodegradáveis para malharia";
+export const TAGLINE = "Nylon monofilamento termo-solúvel para malharia";
 
 // Descricao usada nas metas quando a pagina nao define a sua.
 export const SITE_DESCRIPTION =
-  "Fios de nylon termodegradáveis para malharia. Cones vendidos por quilo, cotação direta por WhatsApp ou e-mail.";
+  "Nylon monofilamento termo-solúvel para separação de golas retilíneas em malharia. Cones vendidos por quilo, cotação direta por WhatsApp ou e-mail.";
 
 // Formata o numero para leitura humana: 5511982408464 -> +55 (11) 98240-8464.
 // Se o numero nao tiver o formato brasileiro esperado, devolve como esta —

@@ -33,8 +33,10 @@ export function organizationSchema() {
   };
 }
 
-// Sem `offers`: o site nao publica preco nem vende online, e declarar oferta
-// sem preco seria informacao inventada.
+// Lista simples, sem `@type: Product`: o preco so e passado por WhatsApp, e o
+// Google reprova Product sem offers/review/aggregateRating ("itens invalidos"
+// no Search Console). Se um dia o site publicar preco, volta a ser Product com
+// `offers` de verdade.
 export function productListSchema() {
   return {
     "@context": "https://schema.org",
@@ -43,24 +45,8 @@ export function productListSchema() {
     itemListElement: PRODUCTS.map((product, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      item: {
-        "@type": "Product",
-        name: product.name,
-        description: product.detail,
-        image: absolute(product.image),
-        url: `${SITE_URL}/produtos#${product.slug}`,
-        material: "Nylon",
-        color: product.color,
-        category: "Fio de nylon termodegradável para malharia",
-        brand: { "@type": "Brand", name: BRAND_NAME },
-        additionalProperty: [
-          { "@type": "PropertyValue", name: "Bitola", value: product.gauge },
-          { "@type": "PropertyValue", name: "Tubete", value: product.tube },
-          { "@type": "PropertyValue", name: "Apresentação", value: "Cone" },
-          { "@type": "PropertyValue", name: "Unidade de venda", value: "Quilo" },
-          { "@type": "PropertyValue", name: "Aplicação", value: product.application },
-        ],
-      },
+      name: `${product.name} ${product.color.toLowerCase()}`,
+      url: `${SITE_URL}/produtos#${product.slug}`,
     })),
   };
 }

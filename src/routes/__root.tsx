@@ -68,7 +68,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image:height", content: "630" },
       {
         property: "og:image:alt",
-        content: `${BRAND_NAME} — cone de fio de nylon termodegradável`,
+        content: `${BRAND_NAME} — cone de nylon monofilamento termo-solúvel`,
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: `${SITE_URL}/og.jpg` },
